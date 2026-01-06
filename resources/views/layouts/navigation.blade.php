@@ -98,3 +98,9 @@
         </div>
     </div>
 </nav>
+
+@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+    <x-nav-link :href="route('worker.panel')" :active="request()->routeIs('worker.panel')">
+        {{ __('Panel Pracownika') }}
+    </x-nav-link>
+@endif

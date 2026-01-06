@@ -24,14 +24,14 @@ class CommentController extends Controller
         return back()->with('success', 'Dodano komentarz!');
     }
 
-    public function destroy(Comment $comment)
-    {
-        // Admin lub właściciel komentarza może usuwać
-        if (Auth::user()->role_id === 1 || Auth::id() === $comment->user_id) {
-            $comment->delete();
-            return back()->with('success', 'Komentarz usunięty.');
-        }
-
-        return back()->with('error', 'Brak uprawnień.');
+ public function destroy(Comment $comment)
+{
+    // Jeśli użytkownik jest Adminem (1) lub Pracownikiem (2) LUB jest autorem komentarza
+    if (in_array(Auth::user()->role_id, [1, 2]) || Auth::id() === $comment->user_id) {
+        $comment->delete();
+        return back()->with('success', 'Komentarz został usunięty.');
     }
+
+    return back()->with('error', 'Brak uprawnień.');
+}
 }
