@@ -1,14 +1,14 @@
 # PROJEKT APLIKACJE INTERNETOWE 2026
 
-**Autor:** [TU WPISZ SWOJE IMIĘ I NAZWISKO]  
-**Numer Indeksu:** [TU WPISZ SWOJE NUMERY]
+**Autor:** [Michał Mazurek]  
+**Numer Indeksu:** [21265]
 
 ---
 
 ## 1. Tematyka i cel projektu
 Głównym celem projektu było stworzenie nowoczesnego forum dyskusyjnego dla społeczności motocyklowej – **MotoForum**. Aplikacja umożliwia wymianę doświadczeń, zadawanie pytań technicznych oraz integrację użytkowników poprzez tworzenie wątków tematycznych.
 
-![Strona Główna](FileHelp/[nazwa_zdjecia].PNG)
+![Strona Główna](FileHelp/[LOGO].PNG)
 
 ---
 
@@ -18,7 +18,7 @@ Osoby odwiedzające stronę bez konta mają możliwość:
 * Korzystania z funkcji dostępności (WCAG) – zmiana kontrastu i powiększanie tekstu.
 * Dostępu do formularzy rejestracji i logowania.
 
-![Ekran Gościa](FileHelp/[nazwa_zdjecia].PNG)
+![Ekran Gościa](FileHelp/[PanelGlowny].PNG)
 
 ---
 
@@ -38,6 +38,7 @@ Aplikacja posiada system ról (użytkownik, pracownik/moderator, administrator).
 * Moderację treści (usuwanie postów/komentarzy).
 * Zarządzanie kategoriami forum.
 * Przegląd statystyk serwisu.
+* Administrator może zmieniać role urzytkowników
 
 ![Panel Zarządzania](FileHelp/[nazwa_zdjecia].PNG)
 
