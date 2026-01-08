@@ -8,7 +8,7 @@
 ## 1. Tematyka i cel projektu
 Głównym celem projektu było stworzenie nowoczesnego forum dyskusyjnego dla społeczności motocyklowej – **MotoForum**. Aplikacja umożliwia wymianę doświadczeń, zadawanie pytań technicznych oraz integrację użytkowników poprzez tworzenie wątków tematycznych.
 
-![Strona Główna](FileHelp/LOGO.PNG)
+![Strona Główna](FileHelp/LOGO.png)
 
 ---
 
