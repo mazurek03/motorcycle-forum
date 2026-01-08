@@ -18,7 +18,7 @@ Osoby odwiedzające stronę bez konta mają możliwość:
 * Korzystania z funkcji dostępności (WCAG) – zmiana kontrastu i powiększanie tekstu.
 * Dostępu do formularzy rejestracji i logowania.
 
-![Ekran Gościa](FileHelp/[PanelGlowny].png)
+![Ekran Gościa](FileHelp/PanelGlowny.PNG)
 
 ---
 
