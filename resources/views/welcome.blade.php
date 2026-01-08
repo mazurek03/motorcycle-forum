@@ -6,14 +6,27 @@
     <title>MotoForum | Społeczność Motocyklowa</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style id="accessibility-css"></style>
 </head>
-<body class="antialiased bg-slate-900 text-slate-200">
+<body class="antialiased bg-slate-900 text-slate-200 transition-colors duration-200">
+
     <nav class="bg-slate-800/50 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
             <div class="flex items-center gap-2">
                 <span class="text-3xl">🏍️</span>
                 <span class="text-2xl font-black tracking-tighter text-white uppercase">Moto<span class="text-orange-500">Forum</span></span>
             </div>
+
+            <div class="flex items-center gap-2 mx-4">
+                <button onclick="toggleAccessibility('contrast')" class="bg-white text-black hover:bg-yellow-400 border-2 border-black px-3 py-1 rounded text-[10px] font-black transition shadow-sm">
+                    👁️ KONTRAST
+                </button>
+                <button onclick="toggleAccessibility('font')" class="bg-white text-black hover:bg-blue-400 border-2 border-black px-3 py-1 rounded text-[10px] font-black transition shadow-sm">
+                    A+ TEKST
+                </button>
+            </div>
+
             <div class="flex gap-4">
                 @auth
                     <a href="{{ url('/dashboard') }}" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-bold transition">PANEL GŁÓWNY</a>
@@ -26,7 +39,7 @@
     </nav>
 
     <header class="relative py-20 bg-slate-900 overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070')] bg-cover bg-center opacity-20"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070')] bg-cover bg-center opacity-20 shadow-inner"></div>
         <div class="relative max-w-7xl mx-auto px-4 text-center">
             <h1 class="text-6xl font-extrabold text-white mb-6 leading-tight">Pasja, Prędkość, <span class="text-orange-500 underline decoration-orange-500/30">Społeczność.</span></h1>
             <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">Wymieniaj się doświadczeniami, pytaj o serwis i planuj wspólne trasy z tysiącami motocyklistów z całej Polski.</p>
@@ -81,5 +94,47 @@
             <p class="text-slate-500 text-sm">&copy; 2026 MotoForum Project. Wszystkie lewe w górę! ✌️</p>
         </div>
     </footer>
+
+    <script>
+        function updateAccessibilityStyles() {
+            const isContrast = localStorage.getItem('hc') === 'true';
+            const isFont = localStorage.getItem('lt') === 'true';
+            const styleTag = document.getElementById('accessibility-css');
+            let css = '';
+
+            if (isContrast) {
+                css += `
+                    html, body, nav, header, main, footer, article, div { 
+                        background-color: #000 !important; 
+                        color: #ff0 !important; 
+                        border-color: #ff0 !important; 
+                        background-image: none !important;
+                    }
+                    h1, h2, h3, span, p, a { color: #ff0 !important; }
+                    a, button { border: 2px solid #ff0 !important; text-decoration: underline !important; }
+                    .absolute { opacity: 1 !important; } /* Pokazuje tło w headerze w kontrastowym kolorze */
+                `;
+            }
+            if (isFont) {
+                css += `
+                    html { font-size: 135% !important; }
+                    body, p, span, a, div, h3 { line-height: 1.8 !important; }
+                `;
+            }
+            styleTag.innerHTML = css;
+        }
+
+        function toggleAccessibility(type) {
+            if (type === 'contrast') {
+                localStorage.setItem('hc', localStorage.getItem('hc') === 'true' ? 'false' : 'true');
+            } else {
+                localStorage.setItem('lt', localStorage.getItem('lt') === 'true' ? 'false' : 'true');
+            }
+            updateAccessibilityStyles();
+        }
+
+        // Uruchom przy starcie, aby zapamiętać ustawienia
+        document.addEventListener('DOMContentLoaded', updateAccessibilityStyles);
+    </script>
 </body>
 </html>
