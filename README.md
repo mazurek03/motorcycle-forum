@@ -1,36 +1,73 @@
-# 🏍️ Motorcycle Forum - System Zarządzania Społecznością
+# PROJEKT APLIKACJE INTERNETOWE 2026
 
-Profesjonalne forum dyskusyjne dla pasjonatów motocykli, zbudowane w oparciu o framework **Laravel 12**. Projekt implementuje zaawansowany system uprawnień (RBAC), moderację treści oraz mechanizmy bezpieczeństwa.
+**Autor:** [TU WPISZ SWOJE IMIĘ I NAZWISKO]  
+**Numer Indeksu:** [TU WPISZ SWOJE NUMERY]
 
-## 🚀 Główne Funkcjonalności
+---
 
-### 👤 System Użytkowników i Uprawnień (RBAC)
-Aplikacja rozróżnia trzy poziomy uprawnień:
-* **Administrator (Rola 1):** Pełna kontrola nad systemem. Zarządza kadrą (nadaje/odbiera rolę Workera) oraz ma dostęp do wszystkich narzędzi moderacyjnych.
-* **Worker/Moderator (Rola 2):** Odpowiada za porządek na forum. Może usuwać dowolne posty i komentarze oraz nakładać czasowe blokady (bany) na użytkowników.
-* **Klient (Rola 3):** Standardowy użytkownik. Może przeglądać treści, tworzyć własne posty oraz komentować wpisy innych.
+## 1. Tematyka i cel projektu
+Głównym celem projektu było stworzenie nowoczesnego forum dyskusyjnego dla społeczności motocyklowej – **MotoForum**. Aplikacja umożliwia wymianę doświadczeń, zadawanie pytań technicznych oraz integrację użytkowników poprzez tworzenie wątków tematycznych.
 
-### 🚫 System Banowania i Bezpieczeństwa
-* **Middleware `CheckBanned`:** Autorski mechanizm ochronny, który przy każdym żądaniu sprawdza status użytkownika. Zbanowani użytkownicy są natychmiast wylogowywani z systemu.
-* **Blokady Czasowe:** Możliwość nałożenia bana na 1, 7 lub 30 dni bezpośrednio z panelu pracownika.
-* **Integracja z Carbon:** Precyzyjne wyliczanie czasu blokady i automatyczne przywracanie dostępu po wygaśnięciu kary.
+![Strona Główna](FileHelp/[nazwa_zdjecia].PNG)
 
-### 🛠️ Panel Zarządzania (Worker Panel)
-Dedykowany interfejs dla administracji (`/worker/panel`), oferujący:
-* Statystyki bazy danych w czasie rzeczywistym.
-* Tabelę moderacji wpisów z szybkim usuwaniem.
-* Moduł zarządzania użytkownikami z dynamicznym statusem "Aktywny/Zablokowany".
+---
 
-## 💻 Technologia
-* **Backend:** PHP 8.2+ / Laravel 12.45
-* **Frontend:** Tailwind CSS / Blade Templates
-* **Baza danych:** MySQL (XAMPP)
-* **Zarządzanie czasem:** Carbon Library
-* **Autentykacja:** Laravel Breeze (modyfikowany)
+## 2. Funkcje dla użytkowników niezalogowanych
+Osoby odwiedzające stronę bez konta mają możliwość:
+* Przeglądania najnowszych dyskusji na stronie głównej.
+* Korzystania z funkcji dostępności (WCAG) – zmiana kontrastu i powiększanie tekstu.
+* Dostępu do formularzy rejestracji i logowania.
 
-## 🔧 Instalacja i Uruchomienie
+![Ekran Gościa](FileHelp/[nazwa_zdjecia].PNG)
 
-1. **Klonowanie repozytorium:**
-   ```bash
-   git clone [https://github.com/TwojUser/motorcycle-forum.git](https://github.com/TwojUser/motorcycle-forum.git)
-   cd motorcycle-forum
+---
+
+## 3. Funkcje dla użytkowników zalogowanych
+Po uwierzytelnieniu użytkownik uzyskuje dostęp do:
+* Tworzenia nowych tematów (postów) w wybranych kategoriach.
+* Komentowania istniejących wątków.
+* Edycji własnego profilu i zmiany danych osobowych.
+* Panelu Dashboard z podsumowaniem aktywności.
+
+![Panel Użytkownika](FileHelp/[nazwa_zdjecia].PNG)
+
+---
+
+## 4. Panel Zarządzania (Role i Uprawnienia)
+Aplikacja posiada system ról (użytkownik, pracownik/moderator, administrator). Osoby z odpowiednimi uprawnieniami mają dostęp do specjalnego panelu, który pozwala na:
+* Moderację treści (usuwanie postów/komentarzy).
+* Zarządzanie kategoriami forum.
+* Przegląd statystyk serwisu.
+
+![Panel Zarządzania](FileHelp/[nazwa_zdjecia].PNG)
+
+---
+
+## 5. Dostępność (WCAG 2.1)
+Projekt został dostosowany do potrzeb osób słabowidzących poprzez:
+* **Wysoki Kontrast:** Tryb czarno-żółty wymuszający czytelność elementów.
+* **Skalowanie Tekstu:** Możliwość powiększenia czcionki o 35% bez rozbijania układu strony.
+* **Trwałość ustawień:** Wykorzystanie `localStorage` do zapamiętywania preferencji użytkownika.
+
+![Dostępność WCAG](FileHelp/[nazwa_zdjecia].PNG)
+
+---
+
+## 6. Wykorzystane technologie
+* **Backend:** Laravel (PHP)
+* **Frontend:** Blade, Tailwind CSS, JavaScript (Alpine.js)
+* **Baza Danych:** MySQL / MariaDB
+* **Narzędzia:** Vite, Composer, NPM
+
+![Technologie](FileHelp/[nazwa_zdjecia].PNG)
+
+---
+
+## 7. Instrukcja uruchomienia projektu
+1. Skopiuj repozytorium.
+2. Wykonaj `composer install` oraz `npm install`.
+3. Skonfiguruj plik `.env` (baza danych).
+4. Wykonaj migracje: `php artisan migrate --seed`.
+5. Uruchom serwer: `php artisan serve` oraz `npm run dev`.
+
+![Instalacja](FileHelp/[nazwa_zdjecia].PNG)
