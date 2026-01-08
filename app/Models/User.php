@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +17,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'banned_until',
     ];
 
     protected $hidden = [
@@ -22,21 +25,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'banned_until' => 'datetime', // TO JEST KLUCZOWE
+    ];
 }

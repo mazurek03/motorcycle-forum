@@ -21,17 +21,17 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        return back()->with('success', 'Dodano komentarz!');
+        return back()->with('success', 'Komentarz dodany!');
     }
 
- public function destroy(Comment $comment)
-{
-    // Jeśli użytkownik jest Adminem (1) lub Pracownikiem (2) LUB jest autorem komentarza
-    if (in_array(Auth::user()->role_id, [1, 2]) || Auth::id() === $comment->user_id) {
-        $comment->delete();
-        return back()->with('success', 'Komentarz został usunięty.');
-    }
+    public function destroy(Comment $comment)
+    {
+        // Sprawdzamy czy użytkownik jest autorem LUB ma rolę Admina(1) LUB Pracownika(2)
+        if (Auth::id() === $comment->user_id || in_array(Auth::user()->role_id, [1, 2])) {
+            $comment->delete();
+            return back()->with('success', 'Komentarz został usunięty przez moderatora.');
+        }
 
-    return back()->with('error', 'Brak uprawnień.');
-}
+        return back()->with('error', 'Brak uprawnień do usunięcia tego komentarza.');
+    }
 }

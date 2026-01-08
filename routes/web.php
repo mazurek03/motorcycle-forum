@@ -24,11 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Backend (Pracownik/Admin)
+    // Backend (Pracownik: rola 2, Admin: rola 1)
     Route::middleware(['role:1,2'])->prefix('worker')->name('worker.')->group(function () {
         Route::get('/panel', [WorkerController::class, 'index'])->name('panel');
-        // NOWA TRASA DO BANOWANIA:
         Route::post('/users/{user}/ban', [WorkerController::class, 'banUser'])->name('users.ban');
+        Route::post('/users/{user}/role', [WorkerController::class, 'changeRole'])->name('users.role');
     });
 });
 
