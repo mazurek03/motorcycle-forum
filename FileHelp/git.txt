@@ -1,0 +1,7 @@
+Git status 
+Git add. - dodaje wszystkie nowe i zmienione pliki do poczekali 
+git commit -m "nazwa commitu"
+git push origin main - wysyła zmiany na serwer
+
+git pull origin main pobiera najnowsza wersję z github
+php artisan migrate:status sprawdzanie migracji tabel
