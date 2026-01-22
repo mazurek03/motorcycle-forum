@@ -7,15 +7,17 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        // Pobieramy posty z relacjami
+        // Pobieramy posty z relacjami (Eager Loading zapobiega problemowi N+1)
         $query = Post::with(['user', 'category', 'comments.user']);
 
-        // Wyszukiwanie po tytule lub treści
+        // Wyszukiwanie
         if ($request->filled('search')) {
             $searchTerm = '%' . $request->search . '%';
             $query->where(function($q) use ($searchTerm) {
@@ -32,35 +34,38 @@ class PostController extends Controller
         $posts = $query->latest()->get();
         $categories = Category::all();
 
-        // Statystyki dla Dashboardu
+        // Statystyki
         $totalUsers = User::count();
         $totalPosts = Post::count();
 
         return view('dashboard', compact('posts', 'categories', 'totalUsers', 'totalPosts'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
         ]);
 
         Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category_id' => $request->category_id,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'category_id' => $validated['category_id'],
             'user_id' => Auth::id(),
         ]);
 
         return back()->with('success', 'Post został dodany!');
     }
 
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
-        // Uprawnienia: Admin (role_id 1) lub właściciel
-        if (Auth::user()->role_id === 1 || Auth::id() === $post->user_id) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Sprawdzamy uprawnienia
+        if ($user && ($user->role_id === 1 || $user->id === $post->user_id)) {
             $post->delete();
             return back()->with('success', 'Post usunięty.');
         }
